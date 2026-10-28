@@ -1,3 +1,4 @@
+
 import pygame
 
 
@@ -8,8 +9,14 @@ class Entidade(pygame.sprite.Sprite):
 
         self.velocidade = velocidade
 
-        self.image = pygame.Surface((40, 40))
-        self.rect = self.image.get_rect(center=(x, y))
+        self.image = pygame.Surface(
+            (40, 40),
+            pygame.SRCALPHA
+        )
+
+        self.rect = self.image.get_rect(
+            center=(x, y)
+        )
 
     def mover(self, dx, dy):
         self.rect.x += dx

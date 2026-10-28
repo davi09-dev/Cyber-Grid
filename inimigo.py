@@ -1,3 +1,6 @@
+
+import pygame
+import random
 from entidade import Entidade
 
 
@@ -6,7 +9,26 @@ class Inimigo(Entidade):
     def __init__(self, x, y, velocidade):
         super().__init__(x, y, velocidade)
 
-        self.image.fill((255, 0, 0))
+        imagens = [
+            "imagens/inimigo1.png",
+            "imagens/inimigo2.png",
+            "imagens/inimigo3.png"
+        ]
+
+        caminho = random.choice(imagens)
+
+        imagem = pygame.image.load(
+            caminho
+        ).convert_alpha()
+
+        self.image = pygame.transform.scale(
+            imagem,
+            (80, 80)
+        )
+
+        self.rect = self.image.get_rect(
+            center=(x, y)
+        )
 
     def atualizar_posicao(self):
         raise NotImplementedError

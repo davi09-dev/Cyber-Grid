@@ -1,3 +1,4 @@
+
 import pygame
 from entidade import Entidade
 
@@ -7,7 +8,19 @@ class Jogador(Entidade):
     def __init__(self, x, y):
         super().__init__(x, y, 6)
 
-        self.image.fill((0, 150, 255))
+        imagem = pygame.image.load(
+            "imagens/nave.png"
+        ).convert_alpha()
+
+        self.image = pygame.transform.scale(
+            imagem,
+            (54, 62)
+        )
+
+        self.rect = self.image.get_rect(
+            center=(x, y)
+        )
+
         self.vida = 5
 
     def update(self):
@@ -26,6 +39,12 @@ class Jogador(Entidade):
         if keys[pygame.K_d]:
             self.mover(self.velocidade, 0)
 
-        # Limites da tela
-        self.rect.x = max(0, min(self.rect.x, 800 - 40))
-        self.rect.y = max(0, min(self.rect.y, 600 - 40))
+        self.rect.x = max(
+            0,
+            min(self.rect.x, 800 - self.rect.width)
+        )
+
+        self.rect.y = max(
+            0,
+            min(self.rect.y, 600 - self.rect.height)
+        )
